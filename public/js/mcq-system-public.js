@@ -39,14 +39,17 @@
 			UserAnswers.push(UserAnswer)
 		});
 console.log(ajax_var.url)
-
-		var data = {
-			'action': 'mcq_user_response',
-			'nonce': ajax_var.nonce,
-			'UserAnswers': UserAnswers
-		};
-		jQuery.post(ajax_var.url, data, function(response) {
-			alert('Got this from the server: ' + response);
+		$.ajax({
+			url: ajax_var.url,
+			method: "POST",
+			data: {
+				action: 'mcq_user_response',
+				nonce: ajax_var.nonce,
+				UserAnswers: UserAnswers
+			},
+			success: function(response){
+				console.log(response)
+			}
 		});
 
 	})
