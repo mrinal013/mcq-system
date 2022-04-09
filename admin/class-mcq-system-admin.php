@@ -52,20 +52,27 @@ class Mcq_System_Admin {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
-		add_action('init', array( $this, 'mcq_custom_posts'));
+		add_action('init', array( $this, 'mcq_custom_posts' ) );
+		add_action( 'widgets_init', array( $this, 'mcq_widget') );
 	}
 
 	public function mcq_custom_posts() {
 		register_post_type('mcq_question',
 			array(
 				'labels'      => array(
-					'name'          => __('MCQ Questions', 'textdomain'),
-					'singular_name' => __('MCQ Question', 'textdomain'),
+					'name'          => __('MCQ Questions', 'mcq'),
+					'singular_name' => __('MCQ Question', 'mcq'),
+					'add_new'		=> __('Add MCQ Question', 'mcq')
 				),
-					'public'      => true,
-					'has_archive' => true,
+				'public'      => true,
+				'has_archive' => true,
+				'supports'           => array( 'title', 'editor' ),
 			)
 		);
+	}
+
+	public function mcq_widget() {
+		register_widget( 'MCQ_Widget' );
 	}
 
 	/**
@@ -111,6 +118,10 @@ class Mcq_System_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mcq-system-admin.js', array( 'jquery' ), $this->version, false );
+		wp_localize_script($this->plugin_name, 'ajax_var', array(
+			'url' => admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('ajax-nonce')
+		));
 
 	}
 

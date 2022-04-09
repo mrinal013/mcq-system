@@ -28,5 +28,27 @@
 	 * Although scripts in the WordPress core, Plugins and Themes may be
 	 * practising this, we should strive to set a better example in our own work.
 	 */
+	$(document).on('click', '.mcq-system-button', function() {
 
+		var UserAnswers = [];
+
+		$('.mcqarea-wrapper').each(function(){
+			var MCQId = $(this).attr('id');
+			var MCQAnswer = $(this).find('input').val();
+			var UserAnswer = {MCQId , MCQAnswer};
+			UserAnswers.push(UserAnswer)
+		});
+		console.log(ajax_var);
+
+		// $.ajax({
+		// 	url: ajax_var.url,
+		// 	method: 'POST',
+		// 	data: {
+		// 		action: 'mcq_user_response',
+		// 		nonce: ajax_var.nonce,
+		// 		UserAnswers: UserAnswers
+		// 	}
+		// })
+
+	})
 })( jQuery );

@@ -124,6 +124,10 @@ class Mcq_System {
 
 		$this->loader = new Mcq_System_Loader();
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-mcq-system-widget.php';
+
+		
+
 	}
 
 	/**
