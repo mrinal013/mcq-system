@@ -32,7 +32,6 @@ class mcq_widget extends WP_Widget
             while ( $mcq_questions->have_posts() ) :
                 $mcq_questions->the_post();
                 the_title();
-                the_ID();
                 ?>
                 <div class="mcqarea-wrapper" id="<?php echo 'mcq-' . get_the_ID(); ?>">
                     <span>Answer: </span>
