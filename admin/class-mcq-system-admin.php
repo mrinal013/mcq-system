@@ -118,10 +118,7 @@ class Mcq_System_Admin {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mcq-system-admin.js', array( 'jquery' ), $this->version, false );
-		wp_localize_script($this->plugin_name, 'ajax_var', array(
-			'url' => admin_url('admin-ajax.php'),
-			'nonce' => wp_create_nonce('ajax-nonce')
-		));
+		
 
 	}
 

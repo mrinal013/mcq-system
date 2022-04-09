@@ -52,6 +52,11 @@ class Mcq_System_Public {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 
+		add_action('wp_ajax_mcq_user_response', array($this, 'mcq_user_response_cb'));
+
+	}
+
+	public function mcq_user_response_cb() {
 	}
 
 	/**
@@ -97,7 +102,10 @@ class Mcq_System_Public {
 		 */
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/mcq-system-public.js', array( 'jquery' ), $this->version, false );
-
+		wp_localize_script($this->plugin_name, 'ajax_var', array(
+			'url' 	=> admin_url('admin-ajax.php'),
+			'nonce' => wp_create_nonce('ajax-nonce')
+		));
 	}
 
 }
