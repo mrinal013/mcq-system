@@ -8,17 +8,17 @@
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
  *
- * @link              https://mrinalbd.com/
+ * @link              mrinalbd.com
  * @since             1.0.0
- * @package           Mcq_System
+ * @package           Wp_Admin_Vue
  *
  * @wordpress-plugin
  * Plugin Name:       MCQ System
- * Plugin URI:        https://github.com/mrinal013/mcq-system.git
- * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
+ * Plugin URI:        mrinalbd.com
+ * Description:       MCQ System for WordPress.
  * Version:           1.0.0
  * Author:            Mrinal Haque
- * Author URI:        https://mrinalbd.com/
+ * Author URI:        mrinalbd.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       mcq-system
@@ -31,52 +31,25 @@ if ( ! defined( 'WPINC' ) ) {
 }
 
 /**
- * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
+ * Define plugin constants
  */
+define( 'PLUGIN_NAME', 'mcq-system' );
+define( 'PLUGIN_MAIN_FILE', __FILE__ );
 define( 'MCQ_SYSTEM_VERSION', '1.0.0' );
+define( 'PAGE_SLUG', 'mcq-system');
 
-/**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-mcq-system-activator.php
- */
-function activate_mcq_system() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-mcq-system-activator.php';
-	Mcq_System_Activator::activate();
+function activation() {
+	require plugin_dir_path( __FILE__ ) . 'includes/Activator.php';
+	MCQ\Includes\Activator::activate();
 }
-
-/**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-mcq-system-deactivator.php
- */
-function deactivate_mcq_system() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-mcq-system-deactivator.php';
-	Mcq_System_Deactivator::deactivate();
+function deactivation() {
+	require plugin_dir_path( __FILE__ ) . 'includes/Deactivator.php';
+    MCQ\Includes\Deactivator::deactivate();
 }
+register_activation_hook( __FILE__, 'activation' );
+register_deactivation_hook( __FILE__, 'deactivation' );
 
-register_activation_hook( __FILE__, 'activate_mcq_system' );
-register_deactivation_hook( __FILE__, 'deactivate_mcq_system' );
-
-/**
- * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
- */
-require plugin_dir_path( __FILE__ ) . 'includes/class-mcq-system.php';
-
-/**
- * Begins execution of the plugin.
- *
- * Since everything within the plugin is registered via hooks,
- * then kicking off the plugin from this point in the file does
- * not affect the page life cycle.
- *
- * @since    1.0.0
- */
-function run_mcq_system() {
-
-	$plugin = new Mcq_System();
-	$plugin->run();
-
-}
-run_mcq_system();
+add_action( 'init', function(){
+		require plugin_dir_path( __FILE__ ) . 'includes/Controller.php';
+		new MCQ\Includes\Controller();
+});

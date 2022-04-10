@@ -1,9 +1,15 @@
 {
-    "name": "badal/mcq-system",
+    "name": "selise/mcq",
+    "description": "Plugin Boilerplate",
+    "type": "wordpress-plugin",
+    "license": "GPLv2",
+    "minimum-stability": "dev",
+    "require": {},
     "autoload": {
         "psr-4": {
-            "Badal\\McqSystem\\": "src/"
+            "MCQ\\Includes\\": "includes/",
+            "MCQ\\Admin\\": "admin/",
+            "MCQ\\Frontend\\": "public/"
         }
-    },
-    "require": {}
+    }
 }
