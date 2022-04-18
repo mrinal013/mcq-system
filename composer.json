@@ -1,9 +1,0 @@
-{
-    "name": "badal/mcq-system",
-    "autoload": {
-        "psr-4": {
-            "Badal\\McqSystem\\": "src/"
-        }
-    },
-    "require": {}
-}
