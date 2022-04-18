@@ -1,16 +1,14 @@
 <template>
-<div id="app">
-  <v-app>
-    <v-content>
-      <v-row>
-        <v-col>
+    <div>
         <router-view />
-        </v-col>
-      </v-row>
-    </v-content>
-  </v-app>
-</div>
+    </div>
 </template>
+
+<!--<template>-->
+<!--    <div>-->
+<!--        <h1>Hello</h1>-->
+<!--    </div>-->
+<!--</template>-->
 
 <script>
 export default {

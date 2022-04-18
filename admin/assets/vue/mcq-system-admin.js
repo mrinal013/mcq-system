@@ -1,15 +1,10 @@
-import Vue from "vue";
+import { createApp } from "vue";
 import App from "./App.vue";
-import router from "./router";
 import menuFix from "./utils/admin-menu-fix";
+import router from "./router";
 
-Vue.config.productionTip = false;
-/* eslint-disable no-new */
+const app = createApp(App).use(router)
 window.addEventListener("load", function() {
-  new Vue({
-    el: "#app",
-    router,
-    render: (h) => h(App),
-  });
+  app.mount('#app')
   menuFix("mcq-system");
-});
+})

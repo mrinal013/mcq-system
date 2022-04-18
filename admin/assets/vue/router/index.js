@@ -1,12 +1,9 @@
-import Vue from "vue";
-import Router from "vue-router";
+import {createRouter, createWebHashHistory} from "vue-router";
 import Home from "../pages/Home.vue";
 import MCQ from "../pages/MCQ.vue";
+import Add from "../pages/Add.vue";
 
-Vue.use(Router);
-
-export default new Router({
-  routes: [
+const routes = [
     {
       path: "/",
       name: "Home",
@@ -17,5 +14,16 @@ export default new Router({
       name: "MCQ",
       component: MCQ
     },
-  ],
+    {
+      path: "/mcq/add",
+      name: "Add",
+      component: Add
+    },
+];
+
+const router = createRouter({
+    history: createWebHashHistory(),
+  routes
 });
+
+export default router;

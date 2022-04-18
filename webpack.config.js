@@ -1,6 +1,6 @@
 const path = require("path");
 const webpack = require("webpack");
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
+const {VueLoaderPlugin} = require("vue-loader");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const FixStyleOnlyEntriesPlugin = require("webpack-fix-style-only-entries");
 const RemovePlugin = require("remove-files-webpack-plugin");
@@ -15,7 +15,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      vue$: "vue/dist/vue.esm.js", // Use the full build
+      // vue$: "vue/dist/vue.esm.js", // Use the full build
+      'Vue': 'vue/dist/vue.esm-bundler.js'
     },
   },
   output: {
@@ -23,6 +24,9 @@ module.exports = {
     path: path.resolve(__dirname),
   },
   plugins: [
+      new webpack.DefinePlugin({
+        'process.env': {}
+      }),
     new FixStyleOnlyEntriesPlugin(),
     new MiniCssExtractPlugin({
       filename: "[name]/assets/css/mcq-system.build.css",
@@ -53,6 +57,9 @@ module.exports = {
           "style-loader",
           {
             loader: MiniCssExtractPlugin.loader,
+            options: {
+              esModule: false,
+            }
           },
           "css-loader",
           "sass-loader",
@@ -60,8 +67,8 @@ module.exports = {
             loader: "postcss-loader",
             options: {
               sourceMap: true,
-              config: {
-                path: "postcss.config.js",
+              postcssOptions: {
+                config:  "postcss.config.js",
               },
             },
           },
@@ -85,7 +92,7 @@ module.exports = {
             options: {
               implementation: require("sass"),
               sassOptions: {
-                fiber: require("fibers"),
+                // fiber: require("fibers"),
                 indentedSyntax: true, // optional
               },
             },
