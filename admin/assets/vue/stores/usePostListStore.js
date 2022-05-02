@@ -24,6 +24,14 @@ export const usePostListStore = defineStore('postList', {
             this.postList = this.postList.filter((object) => {
                 return object.id != postID
             })
+        },
+        getPost(postID) {
+            const postTitle = this.postList.map((object)=>{
+                if ( object.id == postID ) {
+                    return object.post;
+                }
+            });
+            return postTitle
         }
 
     }

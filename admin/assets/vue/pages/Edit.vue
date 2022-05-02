@@ -29,20 +29,18 @@ export default {
             return this.mcqTitle
         }
     },
-    setup() {
-        // this.postID = $route.params.id
-        // function getValue() {
-        //     this.mcqTitle = 'Hello'
-        // }
-        //
-        // return {getValue}
+    mounted() {
+        // const postid = this.postID
+        const store = usePostListStore()
+        this.mcqTitle = store.getPost(this.postID)
     },
     methods: {
         updatePost(postID) {
             const store = usePostListStore()
             const mcqTitle = this.mcqTitle
             store.editPost(postID, mcqTitle)
-        }
+        },
+
     }
 }
 </script>
