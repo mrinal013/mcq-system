@@ -2,6 +2,7 @@ import {createRouter, createWebHashHistory} from "vue-router";
 import Home from "../pages/Home.vue";
 import MCQ from "../pages/MCQ.vue";
 import Add from "../pages/Add.vue";
+import Edit from "../pages/Edit.vue";
 
 const routes = [
     {
@@ -19,6 +20,11 @@ const routes = [
       name: "Add",
       component: Add
     },
+    {
+        path: '/mcq/edit/:id',
+        name: "Edit",
+        component: Edit
+    }
 ];
 
 const router = createRouter({

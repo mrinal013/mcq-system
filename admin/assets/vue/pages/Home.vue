@@ -1,25 +1,24 @@
 <template>
-  <div class="home">
-    <Card></Card>
+  <div class="container">
+      <div class="row">
+          <div class="col-4">
+              <TodoApp/>
+          </div>
+          <div class="col-4"></div>
+          <div class="col-4"></div>
+      </div>
     <h1>Hello Report</h1>
   </div>
 </template>
 
 <script>
-import Card from '../components/Card.vue';
+import TodoApp from "../components/TodoApp.vue";
 
 export default {
-
   name: 'Home',
   components: {
-    Card
+      TodoApp
   },
-
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js Admin App'
-    }
-  }
 }
 </script>
 
