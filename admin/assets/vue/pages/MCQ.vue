@@ -4,33 +4,27 @@
         <router-link to="/mcq/add">
             <button class="btn btn-primary">Add new question</button>
         </router-link>
+
         <table class="table">
             <thead>
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col">Question</th>
                     <th scope="col">Responses</th>
-                    <th scope="col"></th>
+                    <th scope="col">Action</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Capital of Bangladesh?</td>
+                <tr v-for="mcq in postList" :key="mcq.id">
+                    <th scope="row">{{mcq.id}}</th>
+                    <td>{{mcq.post}}</td>
                     <td>5</td>
                     <td>
-                        <button type="button" class="btn btn-primary">Edit</button>
-                        <button type="button" class="btn btn-warning">Delete</button>
+                        <router-link :to="{ name: 'Edit', params: { id: mcq.id} }">
+                            <button type="button" class="btn btn-primary">Edit</button>
+                        </router-link>
+                        <button type="button" class="btn btn-warning ms-1" @click="deletePost(mcq.id)">Delete</button>
                     </td>
-                </tr>
-                <tr>
-                      <th scope="row">2</th>
-                      <td>Your current role</td>
-                      <td>10</td>
-                      <td>
-                          <button type="button" class="btn btn-primary">Edit</button>
-                          <button type="button" class="btn btn-warning">Delete</button>
-                      </td>
                 </tr>
             </tbody>
         </table>
@@ -38,23 +32,27 @@
 </template>
 
 <script>
+import {usePostListStore} from "../stores/usePostListStore";
+import {storeToRefs} from "pinia";
 
 export default {
-
   name: 'MCQ',
   components: {
     // List
   },
+    setup() {
+      const store = usePostListStore();
+      const {postList} = storeToRefs(store);
 
-  // data: () => ({
-  //     item: 1,
-  //     items: [
-  //       { text: 'Real-Time', icon: 'mdi-clock' },
-  //       { text: 'Audience', icon: 'mdi-account' },
-  //       { text: 'Conversions', icon: 'mdi-flag' },
-  //     ],
-  //   }),
-};
+      return {postList}
+    },
+    methods: {
+      deletePost(posID) {
+          const store = usePostListStore();
+          store.deletePost(posID)
+      }
+    }
+}
 </script>
 
 <style lang="css" scoped>
